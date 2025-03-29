@@ -6,18 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 using hackathon.project.HackathonProject.backend.database;
 using hackathon.project.HackathonProject.backend.models;
 
-namespace hackathon.project.HackathonProject.backend.controllers
+namespace backend.controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AdminController : ControllerBase
+    public class EmployeeController : ControllerBase
     {
-        [HttpPost("adminLogin")]
+        [HttpPost("employeeLogin")]
         public async Task<IActionResult> Login([FromBody] Login newLogin)
         {
             Database myDatabase = new();
-            var admin = await myDatabase.Login(newLogin);
-            return Ok(admin);
+            var employee = await myDatabase.Login(newLogin);
+            return Ok(employee);
         }
     }
 }
