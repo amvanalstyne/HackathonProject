@@ -10,7 +10,7 @@ namespace hackathon.project.HackathonProject.backend.controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class RequestController : ControllerBase
+    public class UserController : ControllerBase
     {
         
     }
