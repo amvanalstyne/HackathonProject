@@ -11,22 +11,6 @@ namespace hackathon.project.HackathonProject.backend.controllers
     [Route("[controller]")]
     public class RequestController : Controller
     {
-        private readonly ILogger<RequestController> _logger;
-
-        public RequestController(ILogger<RequestController> logger)
-        {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View("Error!");
-        }
+        
     }
 }
