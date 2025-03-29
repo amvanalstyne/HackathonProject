@@ -43,6 +43,82 @@ namespace hackathon.project.HackathonProject.backend.database
             return null;
         }
 
+        // public async Task<object> PostItemRequest(ItemRequest newRequest){
+        //     string sql = "";
 
+        //     return await PostItemRequestProxy(sql, parms);
+        // }
+
+        // private async Task<object> PostItemRequestProxy(string sql, List<MySqlParameter> parms){
+
+        // }
+
+        // public async Task<object> PostServiceRequest(){
+        //     string sql = "";
+
+        //     return await PostServiceRequestProxy(sql, parms);
+        // }
+
+        // private async Task<object> PostServiceRequestProxy(string sql, List<MySqlParameter> parms){
+
+        // }
+
+        public async Task<object> GetAllItemRequests(){
+            string sql = "SELECT * FROM itemrequests";
+            return await GetItemRequestProxy(sql);
+        }
+
+        private async Task<object> GetItemRequestProxy(string sql){
+            using var connection = new MySqlConnection(cs);
+            await connection.OpenAsync();
+            using var command = new MySqlCommand(sql, connection);
+
+            // if(parms != null){
+            //     command.Parameters.AddRange(parms.ToArray());
+            // }
+            using var reader = await command.ExecuteReaderAsync();
+            if(await reader.ReadAsync()){
+                return new{
+                    RequestID = reader.GetInt32(0),
+                    UserID = reader.GetInt32(1),
+                    ItemID = reader.GetInt32(2),
+                    Status = reader.GetString(3),
+                    RequestTimeStamp = reader.GetString(4),
+                    FulfilledTimeStamp = reader.GetString(5),
+                    Message = reader.GetString(6)
+                }
+            }
+            return null;
+        }
+
+        public async Task<object> GetAllServiceRequests(){
+            string sql = "SELECT * FROM servicerequests";
+            return await GetServiceRequestProxy(sql);
+        }
+
+        private async GetServiceRequestProxy(string sql){
+            using var connection = new MySqlConnection(cs);
+            await connection.OpenAsync();
+            using var command = new MySqlCommand(sql, connection);
+
+            // if(parms != null){
+            //     command.Parameters.AddRange(parms.ToArray());
+            // }
+            using var reader = await command.ExecuteReaderAsync();
+            if(await reader.ReadAsync()){
+                return new{
+                    ServiceID = reader.GetInt32(0),
+                    UserID = reader.GetInt32(1),
+                    CategoryID = reader.GetInt32(2),
+                    LocationID = reader.GetInt32(3),
+                    Description = reader.GetString(4),
+                    Urgency = reader.GetString(5),
+                    Status = reader.GetString(6),
+                    RequestTimeStamp = reader.GetString(7),
+                    FulfilledTimeStamp = reader.GetString(8)
+                }
+            }
+            return null;
+        }
     }
 }
